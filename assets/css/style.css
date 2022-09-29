@@ -37,3 +37,19 @@ nav{
     background-color: #D00000;
     color: #FEFAE0;
 }
+
+body{
+    background-color: #DDA15E;
+}
+
+#green-speech-bubble{
+    text-align: right;
+    margin-top: 200px;
+}
+
+footer{
+    background-color:#606C38;
+    height: 90px;
+    margin-top:199px;
+    
+}
