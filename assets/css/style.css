@@ -42,14 +42,25 @@ body{
     background-color: #DDA15E;
 }
 
+#steak{
+    height: 600px;
+    padding: 0;
+}
+
 #green-speech-bubble{
-    text-align: right;
+    float: right;
     margin-top: 200px;
 }
 
+#red-stars{
+    margin-left: 650px;
+    height: 70px;
+    position: fixed;
+    padding: 0;
+    margin-top: 468px; 
+}
 footer{
-    background-color:#606C38;
-    height: 90px;
-    margin-top:199px;
-    
+    background-color: #606C38;
+    height:164px;
+    padding: 0;
 }
