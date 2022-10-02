@@ -64,3 +64,8 @@ footer{
     height:164px;
     padding: 0;
 }
+
+.hide{
+    display: none;
+
+}
