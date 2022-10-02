@@ -1,0 +1,66 @@
+header{
+    background-color:#FEFAE0;
+    margin: 0;
+}
+
+#title-name{
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    font-family: 'Satisfy', cursive;
+    font-size: 110px;
+    color: #283618;
+    margin-left: 100px;
+    text-shadow: 2px 2px 2px #606c38dc;
+}
+
+nav{
+    position: absolute;
+    top: 50px;
+    right: 200px;
+}
+
+#restaurant-search{
+    width: 500px;
+    height: 70px;
+    border: #283618 solid 1px;
+}
+
+#location-search{
+    width: 400px;
+    height: 70px;
+    border: #283618 solid 1px;
+}
+
+#search-icon{
+    width: 100px;
+    height: 70px;
+    background-color: #D00000;
+    color: #FEFAE0;
+}
+
+body{
+    background-color: #DDA15E;
+}
+
+#steak{
+    height: 600px;
+    padding: 0;
+}
+
+#green-speech-bubble{
+    float: right;
+    margin-top: 200px;
+}
+
+#red-stars{
+    margin-left: 650px;
+    height: 70px;
+    position: fixed;
+    padding: 0;
+    margin-top: 468px; 
+}
+footer{
+    background-color: #606C38;
+    height:164px;
+    padding: 0;
+}
