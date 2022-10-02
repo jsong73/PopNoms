@@ -14,20 +14,24 @@ function getData(event){
     // event.preventDefault();
 
 //if you get CORS error include the cors URL infront of your API URL
-    var requestData = corsUrl + "https://api.yelp.com/v3/businesses/search?location=atlanta&categories=chinese&price=1;" 
+    var requestData = "brokenURL because this is Jung's code";
 
 fetch(requestData, {
     headers:{
-        "Authorization": yelpApiKey
+        "Authorization": "breakbreakbreak"
     }
     })
     .then(function(response){
         return response.json();
     })
     .then(function(data){
+        "wtf is this?"
         console.log(data);
-    })
 
+    })
+    var pTag = document.createElement("p");
+    pTag.textContent = "haha I broke this";
+    document.querySelector("footer").appendChild(pTag);
 }
 
 getData();
