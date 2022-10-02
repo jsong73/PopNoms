@@ -65,7 +65,7 @@ fetch(requestData, {
 //gets data once user CLICKS the SEARCH BTN
 searchBtn.addEventListener("click", getData);
 
-
+    
 
 // var requestData = `${corsUrl}${yelpUrl}${city}${userInput}&${categories}&${price}&${ratings}`
 // console.log(userInput)
