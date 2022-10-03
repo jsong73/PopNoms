@@ -33,7 +33,7 @@ function getData(event){
 
 //if you get CORS error include the cors URL infront of your API URL
     var requestData = `${corsUrl}${yelpUrl}${city}${userLocationInput}&${categories}${userResterauntInput}&${limit}`
-
+    console.log('waht is the url', requestData);
 fetch(requestData, {
     //must include this header with authorization to get access to yelp API 
     headers:{
@@ -45,9 +45,10 @@ fetch(requestData, {
     })
     .then(function(data){
         console.log(data)
- 
+        var resIdTracker = 0;
         for (var i = 0; i < data.businesses.length; i++) {
         //displays restraurant names on screen
+        resIdTracker = i;
         var restaurantNameResults = document.createElement("h1");
         restaurantNameResults.textContent = data.businesses[i].name;
         //displays restraurant $ price on screen
@@ -79,14 +80,18 @@ fetch(requestData, {
             return response.json();
         })
         .then(function(data){
-            console.log(data)
-
-            for (var j = 0; j < 4; j++) {
-            var reviewsText = document.createElement("p");
-            reviewsText.textContent = data.reviews[j].text;
-            var restaurantId = document.getElementById(`restaurant-${i}`)
-            console.log(i)
-           restaurantId.append(reviewsText);
+            console.log(data);
+            for (var j = 0; j < 3; j++) {
+                var reviewsText = document.createElement("p");
+                reviewsText.textContent = data.reviews[j].text;
+                for(let k = 0; k < 5; k++) {
+                    console.log(data.reviews[j].text);
+                    var restaurantId = document.getElementById(`restaurant-${k}`)
+                    // restaurantId.append(reviewsText);
+                    if(restaurantId.children.length < 3) {
+                        restaurantId.append(reviewsText);
+                    }
+                }
         }
         });
  
