@@ -15,26 +15,24 @@ var restaurantInput = document.getElementById("restaurant-search");
 var locationInput = document.getElementById("location-search");
 var searchBtn = document.getElementById("search-icon");
 var displayResultsPage = document.getElementById("results-page")
-var steakImg = document.getElementById("steak");
-var textImg = document.getElementById("green-speech-bubble");
-var starsImg = document.getElementById("red-stars");
+var homepageImg = document.getElementById("homepage-img");
 
 
 function getData(event){
     event.preventDefault();
     userLocationInput = locationInput.value;
     userResterauntInput = restaurantInput.value;
-//hides all the home page images when user clicks the search button
-    steakImg.setAttribute("class", "hide");
-    textImg.setAttribute("class", "hide");
-    starsImg.setAttribute("class", "hide");
-//clears our results and presents new results
+    //hides all the home page images when user clicks the search button
+    homepageImg.setAttribute("class", "hide");
+
+    //clears our results and presents new results
     displayResultsPage.textContent = "";
 
-//if you get CORS error include the cors URL infront of your API URL
+    //if you get CORS error include the cors URL infront of your API URL
     var requestData = `${corsUrl}${yelpUrl}${city}${userLocationInput}&${categories}${userResterauntInput}&${limit}`
-    console.log('waht is the url', requestData);
-fetch(requestData, {
+    console.log(requestData);
+
+    fetch(requestData, {
     //must include this header with authorization to get access to yelp API 
     headers:{
         "Authorization": yelpApiKey
@@ -57,19 +55,26 @@ fetch(requestData, {
         //displays restraurant ratings on screen
         var restaurantRatingResults = document.createElement("p");
         restaurantRatingResults.textContent = data.businesses[i].rating;
+        //displays restraurant image on screen
+        var restaurantImgResults = document.createElement("div");
+        restaurantImgResults.textContent = data.businesses[i].image_url;
         //giving restaurant ratings an ID of restaurant-1, restaurant-2, etc
         restaurantRatingResults.setAttribute("id", `restaurant-${i}`)
 
 
-        //append the name price and ratings to the results page
+        //append the name price image and ratings to the results page
         displayResultsPage.append(restaurantNameResults);
+        displayResultsPage.append(restaurantImgResults);
         displayResultsPage.append(restaurantPriceResults);
         displayResultsPage.append(restaurantRatingResults);
 
+    
         var businessesId = data.businesses[i].id;
         var reviewsUrl = "https://api.yelp.com/v3/businesses/"+ businessesId +"/reviews"
         var requestReviewUrl =  `${corsUrl}${reviewsUrl}`
         console.log(requestReviewUrl)
+
+
         //fetching for yelp api reviews
         fetch(requestReviewUrl,{
             headers:{
@@ -81,7 +86,7 @@ fetch(requestData, {
         })
         .then(function(data){
             console.log(data);
-            for (var j = 0; j < 3; j++) {
+                for (var j = 0; j < 3; j++) {
                 var reviewsText = document.createElement("p");
                 reviewsText.textContent = data.reviews[j].text;
                 for(let k = 0; k < 5; k++) {
@@ -89,7 +94,7 @@ fetch(requestData, {
                     var restaurantId = document.getElementById(`restaurant-${k}`)
                     // restaurantId.append(reviewsText);
                     if(restaurantId.children.length < 3) {
-                        restaurantId.append(reviewsText);
+                    restaurantId.append(reviewsText);
                     }
                 }
         }
@@ -97,7 +102,9 @@ fetch(requestData, {
  
     }
     });
+    
 }
+
 
 
 //gets data once user CLICKS the SEARCH BTN

@@ -40,32 +40,22 @@ nav{
 
 body{
     background-color: #DDA15E;
+    
 }
 
-#steak{
-    height: 600px;
-    padding: 0;
-}
-
-#green-speech-bubble{
-    float: right;
-    margin-top: 200px;
-}
-
-#red-stars{
-    margin-left: 650px;
-    height: 70px;
-    position: fixed;
-    padding: 0;
-    margin-top: 468px; 
-}
 footer{
     background-color: #606C38;
-    height:164px;
+    height:100px;
     padding: 0;
+}
+
+#homepage-img{
+    height: 650px;
+    width: 1903px;
+    opacity: 0.5;
+
 }
 
 .hide{
     display: none;
-
 }
