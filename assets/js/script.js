@@ -20,8 +20,8 @@ var homepageImg = document.getElementById("homepage-img");
 
 function getData(event){
     event.preventDefault();
-    userLocationInput = locationInput.value;
-    userResterauntInput = restaurantInput.value;
+    userLocationInput = locationInput.value.toLowerCase();
+    userResterauntInput = restaurantInput.value.toLowerCase();
     //hides all the home page images when user clicks the search button
     homepageImg.setAttribute("class", "hide");
 
@@ -42,8 +42,7 @@ function getData(event){
         return response.json();
     })
     .then(function(data){
-        console.log(data)
-        var resIdTracker = 0;
+        console.log("This is the data for the businesses", data);
         for (var i = 0; i < data.businesses.length; i++) {
         //displays restraurant names on screen
         resIdTracker = i;
@@ -65,11 +64,11 @@ function getData(event){
 
         //append the name price image and ratings to the results page
         displayResultsPage.append(restaurantNameResults);
-        displayResultsPage.append(restaurantImgResults);
         displayResultsPage.append(restaurantPriceResults);
         displayResultsPage.append(restaurantRatingResults);
+        restaurantRatingResults.appendChild(restaurantImgResults);
+        restaurantRatingResults.append(reviewResults);
 
-    
         var businessesId = data.businesses[i].id;
         var reviewsUrl = "https://api.yelp.com/v3/businesses/"+ businessesId +"/reviews"
         var requestReviewUrl =  `${corsUrl}${reviewsUrl}`
@@ -95,34 +94,13 @@ function getData(event){
                 reviewsText.textContent = data.reviews[i].text;
                 reviewResults.append(reviewsText);
             }
-
-                for (let i=0; i < 3; i++){
-                const reviewsText = document.createElement("li");
-                reviewsText.textContent = data.reviews[i].text;
-                console.log(reviewsText);
- 
-    //            for (var j = 0; j < 3; j++) {
-    //             var reviewsText = document.createElement("p");
-    //             reviewsText.textContent = data.reviews[j].text;
-    //             for(let k = 0; k < 5; k++) {
-    //                 console.log(data.reviews[j].text);
-    //                 var restaurantId = document.getElementById(`restaurant-${k}`)
-    //                 // restaurantId.append(reviewsText);
-    //                 if(restaurantId.children.length < 3) {
-    //                 restaurantId.append(reviewsText);
-    //                 }
-    //             }
-    //     }
-    //     });
-    // }
-    // });
-    
+        })
+} 
 }
+)}
 
 //gets data once user CLICKS the SEARCH BTN
 searchBtn.addEventListener("click", getData);
-
-    
 
 // var requestData = `${corsUrl}${yelpUrl}${city}${userInput}&${categories}&${price}&${ratings}`
 // console.log(userInput)
