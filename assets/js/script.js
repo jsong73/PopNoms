@@ -105,6 +105,7 @@ function getData(event){
     
 }
 
+
 //gets data once user CLICKS the SEARCH BTN
 searchBtn.addEventListener("click", getData);
 
