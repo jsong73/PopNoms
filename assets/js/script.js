@@ -20,8 +20,8 @@ var homepageImg = document.getElementById("homepage-img");
 
 function getData(event){
     event.preventDefault();
-    userLocationInput = locationInput.value;
-    userResterauntInput = restaurantInput.value;
+    userLocationInput = locationInput.value.toLowerCase();
+    userResterauntInput = restaurantInput.value.toLowerCase();
     //hides all the home page images when user clicks the search button
     homepageImg.setAttribute("class", "hide");
 
@@ -42,8 +42,7 @@ function getData(event){
         return response.json();
     })
     .then(function(data){
-        console.log(data)
-        var resIdTracker = 0;
+        console.log("This is the data for the businesses", data);
         for (var i = 0; i < data.businesses.length; i++) {
         //displays restraurant names on screen
         resIdTracker = i;
@@ -56,17 +55,24 @@ function getData(event){
         var restaurantRatingResults = document.createElement("p");
         restaurantRatingResults.textContent = data.businesses[i].rating;
         //displays restraurant image on screen
-        var restaurantImgResults = document.createElement("div");
-        restaurantImgResults.textContent = data.businesses[i].image_url;
+        var restaurantImgResults = document.createElement("img");
+        restaurantImgResults.src = data.businesses[i].image_url;
         //giving restaurant ratings an ID of restaurant-1, restaurant-2, etc
-        restaurantRatingResults.setAttribute("id", `restaurant-${i}`)
+        // restaurantRatingResults.setAttribute("id", `restaurant-${i}`)
+        const reviewResults = document.createElement('ul');
+        // During styling, if you need to add an ID to an element, here's an EXAMPLE OF IT
+        // reviewResults.setAttribute('id', data.businesses[i].alias);
+        reviewResults.setAttribute('data', data.businesses[i].alias);
 
 
         //append the name price image and ratings to the results page
         displayResultsPage.append(restaurantNameResults);
-        displayResultsPage.append(restaurantImgResults);
         displayResultsPage.append(restaurantPriceResults);
         displayResultsPage.append(restaurantRatingResults);
+        restaurantRatingResults.appendChild(restaurantImgResults);
+        restaurantRatingResults.append(reviewResults);
+
+
 
     
         var businessesId = data.businesses[i].id;
@@ -85,19 +91,30 @@ function getData(event){
             return response.json();
         })
         .then(function(data){
-            console.log(data);
-                for (var j = 0; j < 3; j++) {
-                var reviewsText = document.createElement("p");
-                reviewsText.textContent = data.reviews[j].text;
-                for(let k = 0; k < 5; k++) {
-                    console.log(data.reviews[j].text);
-                    var restaurantId = document.getElementById(`restaurant-${k}`)
-                    // restaurantId.append(reviewsText);
-                    if(restaurantId.children.length < 3) {
-                    restaurantId.append(reviewsText);
-                    }
-                }
-        }
+            console.log("This is the data for the REVIEWS of the business", data);
+            for(let i = 0; i < data.reviews.length; i++) {
+                let restaurantUrl = data.reviews[i].url;
+                // console.log("This is to check the URL for the restaurant", restaurantUrl);
+                console.log(restaurantUrl.split('/')[4].split('?'));
+                let parsedUrlRestaurant = restaurantUrl.split('/')[4].split('?')[0];
+                if(reviewResults.getAttribute('data') === parsedUrlRestaurant ) {
+                    const reviewsText = document.createElement('li');
+                    reviewsText.textContent = data.reviews[i].text;
+                    reviewResults.append(reviewsText);
+                }   
+            }
+        //         for (var j = 0; j < 3; j++) {
+        //         var reviewsText = document.createElement("p");
+        //         reviewsText.textContent = data.reviews[j].text;
+        //         for(let k = 0; k < 5; k++) {
+        //             console.log(data.reviews[j].text);
+        //             var restaurantId = document.getElementById(`restaurant-${k}`)
+        //             // restaurantId.append(reviewsText);
+        //             if(restaurantId.children.length < 3) {
+        //             restaurantId.append(reviewsText);
+        //             }
+        //         }
+        // }
         });
  
     }
